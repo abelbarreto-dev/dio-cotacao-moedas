@@ -16,14 +16,14 @@ public class ControllerEuroReal {
 
     @PostMapping("/real-euro")
     public ResponseEntity<Moeda> parseRealToEuro(@RequestBody Moeda moeda) {
-        var cotacao = new MoedaCotacao("BRL-EUR", "EUR-BRL", moeda.getValor());
+        var cotacao = new MoedaCotacao("BRL-EUR", moeda.getValor());
 
         return SingFacade.getInstance().parseRealToEuro(cotacao);
     }
 
     @PostMapping("/euro-real")
     public ResponseEntity<Moeda> parseEuroToReal(@RequestBody Moeda moeda) {
-        var cotacao = new MoedaCotacao("EUR-BRL", "BRL-EUR", moeda.getValor());
+        var cotacao = new MoedaCotacao("EUR-BRL", moeda.getValor());
 
         return SingFacade.getInstance().parseEuroToReal(cotacao);
     }

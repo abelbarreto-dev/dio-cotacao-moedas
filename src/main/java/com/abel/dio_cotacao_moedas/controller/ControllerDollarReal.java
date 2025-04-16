@@ -16,14 +16,14 @@ public class ControllerDollarReal {
 
     @PostMapping("/real-dollar")
     public ResponseEntity<Moeda> parseRealToDollar(@RequestBody Moeda moeda) {
-        var cotacao = new MoedaCotacao("BRL-USD", "USD-BRL", moeda.getValor());
+        var cotacao = new MoedaCotacao("BRL-USD", moeda.getValor());
 
         return SingFacade.getInstance().parseRealToDollar(cotacao);
     }
 
     @PostMapping("/dollar-real")
     public ResponseEntity<Moeda> parseDollarToReal(@RequestBody Moeda moeda) {
-        var cotacao = new MoedaCotacao("USD-BRL", "BRL-USD", moeda.getValor());
+        var cotacao = new MoedaCotacao("USD-BRL", moeda.getValor());
 
         return SingFacade.getInstance().parseDollarToReal(cotacao);
     }

@@ -16,14 +16,14 @@ public class ControllerLibraReal {
 
     @PostMapping("/real-libra")
     public ResponseEntity<Moeda> parseRealToLibra(@RequestBody Moeda moeda) {
-        var cotacao = new MoedaCotacao("BRL-GBP", "GBP-BRL", moeda.getValor());
+        var cotacao = new MoedaCotacao("BRL-GBP", moeda.getValor());
 
         return SingFacade.getInstance().parseRealToLibra(cotacao);
     }
 
     @PostMapping("/libra-real")
     public ResponseEntity<Moeda> parseLibraToReal(@RequestBody Moeda moeda) {
-        var cotacao = new MoedaCotacao("GBP-BRL", "BRL-GBP", moeda.getValor());
+        var cotacao = new MoedaCotacao("GBP-BRL", moeda.getValor());
 
         return SingFacade.getInstance().parseLibraToReal(cotacao);
     }
