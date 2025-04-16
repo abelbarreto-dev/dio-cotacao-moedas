@@ -18,9 +18,11 @@ public class AwesomeAPI {
 
     private AwesomeAPI() {}
 
-    public static ResponseEntity<MoedaData> getExchange(final String currency) {
+    public static MoedaData getExchange(final String currency) {
         final String apiUrl = BASEURL.concat(currency);
         ObjectMapper mapper = new ObjectMapper();
+
+        MoedaData moedaData = null;
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(
@@ -38,12 +40,12 @@ public class AwesomeAPI {
             TypeReference<Map<String, MoedaData>> typeReference = new TypeReference<Map<String, MoedaData>>() {};
             Map<String, MoedaData> cotacoesMap = mapper.readValue(response.getBody(), typeReference);
 
-            return ResponseEntity.ok().body(cotacoesMap.get(keyCurrency));
+            moedaData = cotacoesMap.get(keyCurrency);
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
-        return null;
+        return moedaData;
     }
 }
