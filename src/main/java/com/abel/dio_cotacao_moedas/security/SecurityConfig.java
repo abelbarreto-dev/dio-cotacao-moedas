@@ -18,6 +18,19 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(auth ->
                 auth
                         .requestMatchers(HttpMethod.GET,"/").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/usd-brl").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/usd-brl/real-dollar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/usd-brl/dollar-real").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/eur-brl").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/eur-brl/real-euro").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/eur-brl/euro-real").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/gbp-brl").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/gbp-brl/real-libra").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/gbp-brl/libra-real").permitAll()
+
                         .anyRequest().authenticated()
         ).httpBasic(Customizer.withDefaults());
 
