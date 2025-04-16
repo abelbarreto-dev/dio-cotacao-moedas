@@ -11,13 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(proxyTargetClass = true)
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth ->
                 auth
-                        .requestMatchers(HttpMethod.GET,"").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/").permitAll()
                         .anyRequest().authenticated()
         ).httpBasic(Customizer.withDefaults());
 
