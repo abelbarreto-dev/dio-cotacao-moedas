@@ -32,7 +32,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/gbp-brl/libra-real").permitAll()
 
                         .anyRequest().authenticated()
-        ).httpBasic(Customizer.withDefaults());
+        )
+        .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/api/usd-brl/real-dollar", "/api/usd-brl/dollar-real")
+                .ignoringRequestMatchers("/api/eur-brl/real-euro", "/api/eur-brl/euro-real")
+                .ignoringRequestMatchers("/api/gbp-brl/real-libra", "/api/gbp-brl/libra-real")
+        )
+        .httpBasic(Customizer.withDefaults());
 
         return httpSecurity.build();
     }
