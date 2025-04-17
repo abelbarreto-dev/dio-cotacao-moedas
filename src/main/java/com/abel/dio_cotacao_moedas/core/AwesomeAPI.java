@@ -21,7 +21,7 @@ public class AwesomeAPI {
 
     private AwesomeAPI() {}
 
-    public static MoedaData getExchange(final String currency) throws JsonException {
+    public static MoedaData getExchange(final String currency) {
         final String apiUrl = BASEURL.concat(currency);
         ObjectMapper mapper = new ObjectMapper();
 
