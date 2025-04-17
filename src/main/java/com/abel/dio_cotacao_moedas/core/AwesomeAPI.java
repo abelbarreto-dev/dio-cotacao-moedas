@@ -1,5 +1,6 @@
 package com.abel.dio_cotacao_moedas.core;
 
+import com.abel.dio_cotacao_moedas.exception.MoedaException;
 import com.abel.dio_cotacao_moedas.response.MoedaData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,30 +23,21 @@ public class AwesomeAPI {
         final String apiUrl = BASEURL.concat(currency);
         ObjectMapper mapper = new ObjectMapper();
 
-        MoedaData moedaData = null;
+        ResponseEntity<String> response = restTemplate.exchange(
+                apiUrl,
+                HttpMethod.GET,
+                null,
+                String.class
+        );
 
-        try {
-            ResponseEntity<String> response = restTemplate.exchange(
-                    apiUrl,
-                    HttpMethod.GET,
-                    null,
-                    String.class
-            );
+        final String keyCurrency = currency.replace("-", "");
 
-            final String keyCurrency = currency.replace("-", "");
+        if (!response.getStatusCode().is2xxSuccessful())
+            throw new MoedaException("problem with awesome api.", 500);
 
-            if (!response.getStatusCode().is2xxSuccessful())
-                throw new RuntimeException("problem with awesome api");
+        TypeReference<Map<String, MoedaData>> typeReference = new TypeReference<Map<String, MoedaData>>() {};
+        Map<String, MoedaData> cotacoesMap = mapper.readValue(response.getBody(), typeReference);
 
-            TypeReference<Map<String, MoedaData>> typeReference = new TypeReference<Map<String, MoedaData>>() {};
-            Map<String, MoedaData> cotacoesMap = mapper.readValue(response.getBody(), typeReference);
-
-            moedaData = cotacoesMap.get(keyCurrency);
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
-        return moedaData;
+        return cotacoesMap.get(keyCurrency);
     }
 }
