@@ -3,6 +3,11 @@ Desafio de criação de um projeto utilizando padrões de projeto em Java.
 
 Trata-se de um projeto Springboot;
 
+## Branches
+Esse projeto possui duas branches:
+1. main - a principal.
+2. singleton-facade - possui uma versão usando singleton e facade.
+
 ## Requísitos
 1. Java 21;
 2. Springboot 3.4.4;
