@@ -19,9 +19,7 @@ Esse projeto possui duas branches:
 3. Spring Security;
 
 ## Padrões Utilizados
-1. Singleton;
-2. Strategy;
-3. Facade;
+1. Strategy;
 
 ## Body
 * Para as requisições POST:
