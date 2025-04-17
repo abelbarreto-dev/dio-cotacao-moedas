@@ -21,7 +21,7 @@ public class ServiceEuroReal implements IServiceEuroReal {
 
     @Override
     public ResponseEntity<Moeda> parseRealToEuro(MoedaCotacao moedaCotacao) {
-        var taxa = AwesomeAPI.getExchange("EUR-BRL");
+        var taxa = AwesomeAPI.getExchange(moedaCotacao.moedaCotacao());
 
         var cotacao = new BigDecimal(taxa.getBid());
 
@@ -32,7 +32,7 @@ public class ServiceEuroReal implements IServiceEuroReal {
 
     @Override
     public ResponseEntity<Moeda> parseEuroToReal(MoedaCotacao moedaCotacao) {
-        var taxa = AwesomeAPI.getExchange("EUR-BRL");
+        var taxa = AwesomeAPI.getExchange(moedaCotacao.moedaCotacao());
 
         var cotacao = new BigDecimal(taxa.getBid());
 

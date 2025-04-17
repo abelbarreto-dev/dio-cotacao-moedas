@@ -21,7 +21,7 @@ public class ServiceLibraReal implements IServiceLibraReal {
 
     @Override
     public ResponseEntity<Moeda> parseRealToLibra(MoedaCotacao moedaCotacao) {
-        var taxa = AwesomeAPI.getExchange("GBP-BRL");
+        var taxa = AwesomeAPI.getExchange(moedaCotacao.moedaCotacao());
 
         var cotacao = new BigDecimal(taxa.getBid());
 
@@ -32,7 +32,7 @@ public class ServiceLibraReal implements IServiceLibraReal {
 
     @Override
     public ResponseEntity<Moeda> parseLibraToReal(MoedaCotacao moedaCotacao) {
-        var taxa = AwesomeAPI.getExchange("GBP-BRL");
+        var taxa = AwesomeAPI.getExchange(moedaCotacao.moedaCotacao());
 
         var cotacao = new BigDecimal(taxa.getBid());
 
