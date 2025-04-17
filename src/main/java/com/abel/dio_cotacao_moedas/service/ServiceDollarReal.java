@@ -21,7 +21,7 @@ public class ServiceDollarReal implements IServiceDollarReal {
 
     @Override
     public ResponseEntity<Moeda> parseRealToDollar(MoedaCotacao moedaCotacao) {
-        var taxa = AwesomeAPI.getExchange("USD-BRL");
+        var taxa = AwesomeAPI.getExchange(moedaCotacao.moedaCotacao());
 
         var cotacao = new BigDecimal(taxa.getBid());
 
@@ -32,7 +32,7 @@ public class ServiceDollarReal implements IServiceDollarReal {
 
     @Override
     public ResponseEntity<Moeda> parseDollarToReal(MoedaCotacao moedaCotacao) {
-        var taxa = AwesomeAPI.getExchange("USD-BRL");
+        var taxa = AwesomeAPI.getExchange(moedaCotacao.moedaCotacao());
 
         var cotacao = new BigDecimal(taxa.getBid());
 
